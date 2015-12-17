@@ -26,13 +26,14 @@ public class MultiCounter extends Thread {
 
     public void count() {
         String name = Thread.currentThread().getName();
-        try {
-            for (int i = beginning; i <= end; i++) {
+        for (int i = beginning; i <= end; i++) {
+            try {
                 Thread.sleep(1000);
-                System.out.println(name + ": " + i);
+            } catch (InterruptedException e) {
+                break;
             }
-        } catch (InterruptedException e) {
-            System.out.println(name + " interrupted");
+            System.out.println(name + ": " + i);
+
         }
     }
 
