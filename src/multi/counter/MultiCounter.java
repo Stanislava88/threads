@@ -29,8 +29,9 @@ public class MultiCounter extends Thread {
             }catch (InterruptedException ex){
                 break;
             }
-            System.out.println(name + ": " + i);
             keyLock.lastThread(name);
+            System.out.println(name + ": " + i);
+
         }
 
         if (!(thread == null)) {
