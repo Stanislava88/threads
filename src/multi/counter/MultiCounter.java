@@ -8,20 +8,19 @@ public class MultiCounter extends Thread {
     private int beginning;
     private int end;
     private Thread thread;
-    private final Object lock;
+    private final KeyLock keyLock;
 
 
-    public MultiCounter(int beginning, int end, Object lock) {
+    public MultiCounter(int beginning, int end, KeyLock keyLock) {
         this.beginning = beginning;
         this.end = end;
-        this.lock = lock;
+        this.keyLock = keyLock;
     }
 
     @Override
     public void run() {
-        String name = Thread.currentThread().getName();
         count();
-        if (!(thread==null)) {
+        if (!(thread == null)) {
             thread.interrupt();
         }
 
@@ -31,20 +30,18 @@ public class MultiCounter extends Thread {
     public void count() {
         String name = Thread.currentThread().getName();
 
-        while(beginning<=end) {
 
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
+        for (int i = beginning; i <= end; i++) {
+            try{
+                sleep(100);
+            }catch (InterruptedException ex){
                 break;
             }
-            System.out.println(name + ": " + beginning);
-            synchronized (lock){
-                beginning++;
-            }
+                keyLock.lastThread(name);
+                System.out.println(name+": "+i);
+
+
         }
-
-
     }
 
     public void giveControl(Thread thread) {
