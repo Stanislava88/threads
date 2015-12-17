@@ -8,7 +8,6 @@ public class MultiCounter extends Thread {
     private int beginning;
     private int end;
     private Thread thread;
-    private boolean flag;
 
     public MultiCounter(int beginning, int end) {
         this.beginning = beginning;
@@ -20,7 +19,7 @@ public class MultiCounter extends Thread {
         String name = Thread.currentThread().getName();
         count();
         System.out.println(name + " stoped");
-        if (flag) {
+        if (!(thread==null)) {
             thread.interrupt();
         }
     }
@@ -38,7 +37,6 @@ public class MultiCounter extends Thread {
     }
 
     public void giveControl(Thread thread) {
-        this.flag = true;
         this.thread = thread;
     }
 }
