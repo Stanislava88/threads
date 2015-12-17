@@ -29,16 +29,17 @@ public class TimeoutHashTable<K, V> {
         thread.start();
     }
 
-    public Object get(K key) {
+    public V get(K key) {
         if (!timeoutHashTable.containsKey(key)) {
             return null;
         } else {
             thread.resetCounter();
+
             return timeoutHashTable.get(key).getValue();
         }
     }
 
-    public Object remove(K key) {
+    public V remove(K key) {
         if (!timeoutHashTable.containsKey(key)) {
             return null;
         }
