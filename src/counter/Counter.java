@@ -19,26 +19,24 @@ public class Counter implements Runnable {
     public void run() {
         try {
 
-            for(int i=0; i<value;i++){
-                currentValue=i;
+            for (int i = 0; i < value; i++) {
+                currentValue = i;
                 Thread.sleep(100);
 
             }
         } catch (InterruptedException e) {
-            System.out.println("thread stoped");
-            System.exit(1);
+
         }
+        System.out.println("thread stoped");
     }
 
     public static void main(String[] args) {
-        Thread thread=new Thread(new Counter(1000));
+        Thread thread = new Thread(new Counter(1000));
         thread.start();
-        Scanner input= new Scanner(System.in);
-        while (thread.isAlive()){
-            input.next();
-            thread.interrupt();
-            System.out.println(currentValue);
-        }
+        Scanner input = new Scanner(System.in);
+        input.next();
+        thread.interrupt();
+        System.out.println(currentValue);
 
     }
 }
