@@ -8,33 +8,43 @@ public class MultiCounter extends Thread {
     private int beginning;
     private int end;
     private Thread thread;
+    private final Object lock;
 
-    public MultiCounter(int beginning, int end) {
+
+    public MultiCounter(int beginning, int end, Object lock) {
         this.beginning = beginning;
         this.end = end;
+        this.lock = lock;
     }
 
     @Override
     public void run() {
         String name = Thread.currentThread().getName();
         count();
-        System.out.println(name + " stoped");
         if (!(thread==null)) {
             thread.interrupt();
         }
+
+
     }
 
     public void count() {
         String name = Thread.currentThread().getName();
-        for (int i = beginning; i <= end; i++) {
+
+        while(beginning<=end) {
+
             try {
-                Thread.sleep(1000);
+                sleep(1000);
             } catch (InterruptedException e) {
                 break;
             }
-            System.out.println(name + ": " + i);
-
+            System.out.println(name + ": " + beginning);
+            synchronized (lock){
+                beginning++;
+            }
         }
+
+
     }
 
     public void giveControl(Thread thread) {
