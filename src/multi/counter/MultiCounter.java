@@ -5,13 +5,15 @@ package multi.counter;
  */
 public class MultiCounter extends Thread {
 
+    private String name;
     private int beginning;
     private int end;
     private Thread thread;
     private final KeyLock keyLock;
 
 
-    public MultiCounter(int beginning, int end, KeyLock keyLock) {
+    public MultiCounter(String name, int beginning, int end, KeyLock keyLock) {
+        this.name = name;
         this.beginning = beginning;
         this.end = end;
         this.keyLock = keyLock;
@@ -19,16 +21,6 @@ public class MultiCounter extends Thread {
 
     @Override
     public void run() {
-        count();
-        if (!(thread == null)) {
-            thread.interrupt();
-        }
-
-
-    }
-
-    public void count() {
-        String name = Thread.currentThread().getName();
 
 
         for (int i = beginning; i <= end; i++) {
@@ -37,12 +29,15 @@ public class MultiCounter extends Thread {
             }catch (InterruptedException ex){
                 break;
             }
-                keyLock.lastThread(name);
-                System.out.println(name+": "+i);
+            System.out.println(name + ": " + i);
+            keyLock.lastThread(name);
+        }
 
-
+        if (!(thread == null)) {
+            thread.interrupt();
         }
     }
+
 
     public void giveControl(Thread thread) {
         this.thread = thread;
