@@ -3,10 +3,10 @@ package list.fixed;
 /**
  * @author Krasimir Raikov(raikov.krasimir@gmail.com)
  */
-public class ListDogAddition implements Runnable{
+public class ListAddition implements Runnable{
     private FixedList list;
 
-    public ListDogAddition(FixedList list) {
+    public ListAddition(FixedList list) {
         this.list = list;
     }
 

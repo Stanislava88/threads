@@ -7,7 +7,7 @@ public class Demo {
     public static void main(String[] args) {
         FixedList list= new FixedList(12);
         ListRemover remover= new ListRemover(list);
-        ListDogAddition addition= new ListDogAddition(list);
+        ListAddition addition= new ListAddition(list);
         Thread removerThread= new Thread(remover);
         Thread additionThread= new Thread(addition);
 
