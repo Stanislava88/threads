@@ -10,8 +10,9 @@ public class Demo {
         count.notFirstThread("Thread2");
         MultiCounter controller = new MultiCounter("Thread1" ,1, 5, count);
         MultiCounter controlled = new MultiCounter("Thread2" ,1, 10, count);
-        controller.giveControl(controlled);
+
         controller.start();
+        controller.giveControl(controlled);
         controlled.start();
 
     }
