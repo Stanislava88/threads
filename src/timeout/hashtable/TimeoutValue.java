@@ -3,11 +3,11 @@ package timeout.hashtable;
 /**
  * @author Krasimir Raikov(raikov.krasimir@gmail.com)
  */
-public class TimeoutValue {
-    private final Object value;
+public class TimeoutValue<T> {
+    private final T value;
     private long time;
 
-    public <T> TimeoutValue(T value, long time) {
+    public  TimeoutValue(T value, long time) {
         this.value = value;
         this.time = time;
     }
@@ -21,7 +21,7 @@ public class TimeoutValue {
         this.time= time;
     }
 
-    public <T> T value() {
-        return (T)value;
+    public T value() {
+        return value;
     }
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TimeoutHashtable<K, T> {
 
-    private ConcurrentHashMap<K, TimeoutValue> hashtable= new ConcurrentHashMap<>();
+    private ConcurrentHashMap<K, TimeoutValue<T>> hashtable= new ConcurrentHashMap<>();
 
     private boolean running=true;
 
@@ -51,7 +51,7 @@ public class TimeoutHashtable<K, T> {
     }
 
     public synchronized void put(K key, T value){
-        hashtable.put(key, new TimeoutValue(value, 0L));
+        hashtable.put(key, new TimeoutValue<T>(value, 0L));
     }
 
     public synchronized T get(K  key){
@@ -63,7 +63,7 @@ public class TimeoutHashtable<K, T> {
 
     public synchronized T remove(K key){
         if (hashtable.containsKey(key)) {
-            TimeoutValue tv = hashtable.remove(key);
+            TimeoutValue<T> tv = hashtable.remove(key);
             return tv.value();
         }
         return null;
