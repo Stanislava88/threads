@@ -1,6 +1,5 @@
 package timeout.hashtable;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -9,16 +8,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TimeoutHashtable<K, T> {
 
-    private K k;
-    private T t;
-
-
-    private ConcurrentHashMap<K, Map<T, Long>> hashtable= new ConcurrentHashMap<>();
+    private ConcurrentHashMap<K, TimeoutValue> hashtable= new ConcurrentHashMap<>();
 
     private boolean running=true;
 
     public TimeoutHashtable(long longTimeoutInSeconds){
-
         initiate(longTimeoutInSeconds);
     }
 
@@ -39,14 +33,12 @@ public class TimeoutHashtable<K, T> {
 
             public void check(){
                 for(K key: hashtable.keySet()){
-                    Map<T, Long> map= hashtable.get(key);
-                    for(T t: map.keySet()){
-                        Long currentValue= map.get(t);
-                        if (currentValue>= timeoutSeconds){
-                            hashtable.remove(key);
-                        }else{
-                            map.put(t, currentValue+1);
-                        }
+                    TimeoutValue value= hashtable.get(key);
+                    long time= value.time();
+                    if (time>=timeoutSeconds){
+                        hashtable.remove(key);
+                    }else{
+                        value.time(time+1);
                     }
 
                 }
@@ -59,30 +51,22 @@ public class TimeoutHashtable<K, T> {
     }
 
     public synchronized void put(K key, T value){
-        Map<T, Long> map= new HashMap<>();
-        map.put(value, 0L);
-        hashtable.put(key, map);
+        hashtable.put(key, new TimeoutValue(value, 0L));
     }
 
-    public synchronized T get(String key){
+    public synchronized T get(K  key){
         if (hashtable.containsKey(key)) {
-            Map<T, Long> map = hashtable.get(key);
-            for (T type : map.keySet()) {
-                map.put(type, 0L);
-                return type;
-            }
+            return hashtable.get(key).value();
         }
         return null;
     }
 
-    public synchronized T remove(String key){
+    public synchronized T remove(K key){
         if (hashtable.containsKey(key)) {
-            Map<T, Long> map = hashtable.remove(key);
-            for (T type : map.keySet()) {
-                return type;
-            }
+            TimeoutValue tv = hashtable.remove(key);
+            return tv.value();
         }
-            return null;
+        return null;
     }
 
 }
