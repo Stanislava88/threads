@@ -7,9 +7,7 @@ public class Counter {
 
     private String lastThread;
 
-    public Counter(String notFirstThread) {
-        this.lastThread = notFirstThread;
-    }
+
 
     public synchronized void count(int start, int end, String threadName) {
         for (int i = start; i <= end; i++) {
@@ -30,5 +28,9 @@ public class Counter {
             this.lastThread = threadName;
             notifyAll();
         }
+    }
+
+    public void notFirstThread(String notFirstThread) {
+        lastThread=notFirstThread;
     }
 }
