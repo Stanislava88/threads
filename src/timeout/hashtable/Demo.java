@@ -5,7 +5,7 @@ package timeout.hashtable;
 public class Demo {
 
     public static void main(String[] args) {
-        TimeoutHashtable timeTable= new TimeoutHashtable(1);
+        TimeoutHashtable<String, String> timeTable= new TimeoutHashtable<>(1);
         timeTable.put("key1", "value1");
         timeTable.put("key2", "value2");
         timeTable.put("key3", "value3");
@@ -22,7 +22,7 @@ public class Demo {
         System.out.println(timeTable.get("key2"));
 
         try{
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         }catch (InterruptedException ex){
             ex.printStackTrace();
         }
