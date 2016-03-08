@@ -1,0 +1,31 @@
+package com.clouway.counter.counters;
+
+/**
+ * @author Stanislava Kaukova(sisiivanovva@gmail.com)
+ */
+public class ThreadCounter extends Thread {
+    private int from;
+    private int to;
+
+    private ThreadCounter thread;
+
+    public ThreadCounter(int countFrom, int countTo) {
+        this.from = countFrom;
+        this.to = countTo;
+    }
+
+    @Override
+    public void run() {
+        for (int i = from; i <= to && !isInterrupted(); i++) {
+            System.out.println(getName() + "-" + i);
+
+            if (i == to) {
+                thread.interrupt();
+            }
+        }
+    }
+
+    public void observeThread(ThreadCounter thread) {
+        this.thread = thread;
+    }
+}

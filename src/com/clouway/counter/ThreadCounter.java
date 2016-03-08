@@ -15,11 +15,14 @@ public class ThreadCounter implements Runnable {
     public void run() {
         System.out.println(Thread.currentThread().getName() + "starting!");
         try {
-            do {
-                Thread.sleep(100);
-                count++;
-            } while (count < countTo && !Thread.currentThread().isInterrupted());
+            for (int i = 0; i < countTo && !Thread.currentThread().isInterrupted(); i++) {
+                count = i;
+                System.out.println(count);
+
+                Thread.sleep(1000);
+            }
         } catch (InterruptedException e) {
+            System.out.println("Thread interrupted");
         }
         System.out.println(count);
     }
