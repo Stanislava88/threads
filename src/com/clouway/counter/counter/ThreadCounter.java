@@ -4,7 +4,7 @@ package com.clouway.counter.counter;
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)
  */
 public class ThreadCounter implements Runnable {
-    private int countTo;
+    private final int countTo;
     private int count;
 
     public ThreadCounter(int countTo) {
@@ -21,9 +21,7 @@ public class ThreadCounter implements Runnable {
 
                 Thread.sleep(1000);
             }
-        } catch (InterruptedException e) {
-            System.out.println("Thread interrupted");
-        }
+        } catch (InterruptedException e) {}
         System.out.println(count);
     }
 }

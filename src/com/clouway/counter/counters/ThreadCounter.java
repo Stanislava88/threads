@@ -4,8 +4,8 @@ package com.clouway.counter.counters;
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)
  */
 public class ThreadCounter extends Thread {
-    private int from;
-    private int to;
+    private final int from;
+    private final int to;
 
     private ThreadCounter thread;
 
