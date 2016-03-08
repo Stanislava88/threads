@@ -20,7 +20,7 @@ public class ThreadCounter implements Runnable {
                     count = i;
                     System.out.println(count);
 
-                    Thread.sleep(1000);
+                    Thread.sleep(1000L);
                 }
             } catch (InterruptedException e) {
             }
