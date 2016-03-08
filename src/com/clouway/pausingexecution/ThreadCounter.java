@@ -1,4 +1,4 @@
-package com.clouway.counter.pausingexecution;
+package com.clouway.pausingexecution;
 
 /**
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)

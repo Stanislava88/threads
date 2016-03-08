@@ -1,4 +1,4 @@
-package com.clouway.counter.counters;
+package com.clouway.counters;
 
 /**
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)
