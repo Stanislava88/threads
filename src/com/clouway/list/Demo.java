@@ -11,9 +11,10 @@ public class Demo {
         Consumer consumer = new Consumer(list);
 
         Producer producer1 = new Producer(list);
+        Consumer consumer1=new Consumer(list);
 
         producer.start();
-        producer1.start();
         consumer.start();
+        consumer1.start();
     }
 }

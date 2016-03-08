@@ -17,7 +17,7 @@ public class Consumer extends Thread {
             try {
                 String element = list.remove();
                 System.out.println("Consumer" + " " + element + "is take");
-                Thread.sleep(1000);
+                Thread.sleep(1000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

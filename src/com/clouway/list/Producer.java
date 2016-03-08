@@ -18,7 +18,7 @@ public class Producer extends Thread {
             try {
                 list.add(each);
                 System.out.println("Producer:" + " " + each + "is added");
-                Thread.sleep(1000);
+                Thread.sleep(1000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
