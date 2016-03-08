@@ -15,20 +15,19 @@ public class ThreadCounter extends Thread {
 
     @Override
     public void run() {
-        if (!isInterrupted()) {
-            try {
-                for (int i = from; i <= to; i++) {
-                    System.out.println(getName() + "->" + i);
+        try {
+            for (int i = from; i <= to; i++) {
 
-                    Thread.sleep(1000L);
+                System.out.println(getName() + "->" + i);
 
-                    if (i == to) {
-                        thread.interrupt();
-                    }
+                Thread.sleep(1000L);
+
+                if (i == to) {
+                    thread.interrupt();
                 }
-            } catch (InterruptedException ex) {
-                System.out.println(getName() + "interrupted");
             }
+        } catch (InterruptedException ex) {
+            return;
         }
     }
 

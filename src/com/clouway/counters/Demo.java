@@ -6,11 +6,11 @@ package com.clouway.counters;
  */
 public class Demo {
     public static void main(String[] args) {
-        ThreadCounter counter1 = new ThreadCounter(5, 20);
-        ThreadCounter counter2 = new ThreadCounter(0, 10000);
+        ThreadCounter counter1 = new ThreadCounter(1, 5);
+        ThreadCounter counter2 = new ThreadCounter(1, 5000);
 
-        counter1.observeThread(counter2);
         counter2.observeThread(counter1);
+        counter1.observeThread(counter2);
 
         counter1.start();
         counter2.start();

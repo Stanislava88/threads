@@ -5,8 +5,8 @@ package com.clouway.pausingexecution;
  */
 public class Demo {
     public static void main(String[] args) {
-        ThreadCounter counter1 = new ThreadCounter(1, 5);
-        ThreadCounter counter2 = new ThreadCounter(1, 9);
+        ThreadCounter counter1 = new ThreadCounter(1, 20);
+        ThreadCounter counter2 = new ThreadCounter(1, 5);
 
         counter1.observeThread(counter2);
         counter2.observeThread(counter1);
