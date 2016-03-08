@@ -14,17 +14,15 @@ public class ThreadCounter implements Runnable {
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + "starting!");
-        if (!Thread.currentThread().isInterrupted()) {
-            try {
-                for (int i = 0; i < countTo; i++) {
-                    count = i;
-                    System.out.println(count);
+        try {
+            for (int i = 0; i < countTo; i++) {
+                count = i;
+                System.out.println(count);
 
-                    Thread.sleep(1000L);
-                }
-            } catch (InterruptedException e) {
+                Thread.sleep(1000L);
             }
-            System.out.println(count);
+        } catch (InterruptedException e) {
         }
+        System.out.println(count);
     }
 }

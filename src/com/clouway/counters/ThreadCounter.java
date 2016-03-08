@@ -17,8 +17,10 @@ public class ThreadCounter extends Thread {
     @Override
     public void run() {
         for (int i = from; i <= to; i++) {
+
             if (!isInterrupted()) {
                 System.out.println(getName() + "-" + i);
+
                 if (i == to) {
                     thread.interrupt();
                 }
