@@ -1,4 +1,4 @@
-package com.clouway.counter;
+package com.clouway.counter.counter;
 
 import java.util.Scanner;
 
