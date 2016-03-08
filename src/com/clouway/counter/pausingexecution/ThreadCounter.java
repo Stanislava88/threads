@@ -1,4 +1,4 @@
-package com.clouway.counter.task3;
+package com.clouway.counter.pausingexecution;
 
 /**
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)
