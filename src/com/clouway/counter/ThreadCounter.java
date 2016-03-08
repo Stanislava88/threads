@@ -14,6 +14,7 @@ public class ThreadCounter implements Runnable {
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + "starting!");
+
         try {
             for (int i = 0; i < countTo; i++) {
                 count = i;
@@ -22,7 +23,9 @@ public class ThreadCounter implements Runnable {
                 Thread.sleep(1000L);
             }
         } catch (InterruptedException e) {
+            System.out.println("I was interrupted on " + count + " step.");
+
+            return;
         }
-        System.out.println(count);
     }
 }

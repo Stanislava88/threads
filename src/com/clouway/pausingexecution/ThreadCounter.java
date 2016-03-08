@@ -6,6 +6,7 @@ package com.clouway.pausingexecution;
 public class ThreadCounter extends Thread {
     private final int from;
     private final int to;
+
     private ThreadCounter thread;
 
     public ThreadCounter(int from, int to) {
