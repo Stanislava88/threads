@@ -1,4 +1,4 @@
-package com.clouway.pausingexecution;
+package com.clouway.task3;
 
 /**
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)
