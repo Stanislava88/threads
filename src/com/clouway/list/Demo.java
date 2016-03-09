@@ -7,10 +7,10 @@ public class Demo {
     public static void main(String[] args) {
         ListOfElements list = new ListOfElements(3);
 
-        AdderThread producer = new AdderThread(list);
-        RemoverThread consumer = new RemoverThread(list);
+        AdderThread adder = new AdderThread(list);
+        RemoverThread remover = new RemoverThread(list);
 
-        producer.start();
-        consumer.start();
+        adder.start();
+        remover.start();
     }
 }
