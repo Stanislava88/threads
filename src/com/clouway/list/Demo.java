@@ -5,16 +5,12 @@ package com.clouway.list;
  */
 public class Demo {
     public static void main(String[] args) {
-        ListOfElements list = new ListOfElements(2);
+        ListOfElements list = new ListOfElements(3);
 
-        Producer producer = new Producer(list);
-        Consumer consumer = new Consumer(list);
-
-        Producer producer1 = new Producer(list);
-        Consumer consumer1=new Consumer(list);
+        AdderThread producer = new AdderThread(list);
+        RemoverThread consumer = new RemoverThread(list);
 
         producer.start();
         consumer.start();
-        consumer1.start();
     }
 }
