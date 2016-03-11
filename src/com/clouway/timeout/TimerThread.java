@@ -34,7 +34,7 @@ public class TimerThread<K, T> extends Thread {
             table.remove(key);
             System.out.println("The value:" + value + " removed!");
         } catch (InterruptedException e) {
-            System.out.println("I was interrupted on " + currentTime + " second");
+            System.out.println("I was interrupted on " + currentTime + " second.The element " + value + " is removed");
             return;
         }
     }
