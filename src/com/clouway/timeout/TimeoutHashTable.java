@@ -7,9 +7,9 @@ import java.util.Map;
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)
  */
 public class TimeoutHashTable<K, T> {
-    private Map<K, TimerThread<K, T>> table = new Hashtable<K, TimerThread<K, T>>();
+    private final Map<K, TimerThread<K, T>> table = new Hashtable<K, TimerThread<K, T>>();
 
-    private long timeout;
+    private final long timeout;
 
     public TimeoutHashTable(long timeout) {
         this.timeout = timeout;
@@ -17,7 +17,7 @@ public class TimeoutHashTable<K, T> {
 
     public void put(K key, T value) {
         if (!table.containsKey(key)) {
-            TimerThread<K, T> timer = new TimerThread<K, T>(this, key, value, timeout);
+            TimerThread<K, T> timer = new TimerThread<K, T>(table, key, value, timeout);
 
             table.put(key, timer);
 
@@ -27,7 +27,7 @@ public class TimeoutHashTable<K, T> {
 
             timer.replace(value);
 
-            timer.restartTimer();
+            timer.restart();
         }
     }
 
@@ -35,8 +35,9 @@ public class TimeoutHashTable<K, T> {
         if (table.containsKey(key)) {
             TimerThread<K, T> timer = table.get(key);
             T value = timer.getValue();
-
+            timer.interrupt();
             table.remove(key);
+
             return value;
         }
         return null;
@@ -44,9 +45,9 @@ public class TimeoutHashTable<K, T> {
 
     public T get(K key) {
         if (table.containsKey(key)) {
-
             TimerThread<K, T> timer = table.get(key);
-            timer.restartTimer();
+            timer.restart();
+
             return timer.getValue();
         }
         return null;

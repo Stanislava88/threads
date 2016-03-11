@@ -7,8 +7,9 @@ public class Demo {
     public static void main(String[] args) throws InterruptedException {
         TimeoutHashTable<Object, Object> table = new TimeoutHashTable<Object, Object>(5);//The time is represented in sec.
         table.put(1, "object1");
-        Thread.sleep(1000L);
+        Thread.sleep(2000L);
 
+        table.remove(1);
         table.put(1, "Person"); // timer Restart + replace value
         Thread.sleep(12000L);
 

@@ -1,17 +1,19 @@
 package com.clouway.timeout;
 
+import java.util.Map;
+
 /**
  * @author Stanislava Kaukova(sisiivanovva@gmail.com)
  */
 public class TimerThread<K, T> extends Thread {
-    private TimeoutHashTable<K, T> table;
+    private final Map<K, TimerThread<K, T>> table;
     private final K key;
     private T value;
 
-    private long timeout;
+    private final long timeout;
     private long currentTime;
 
-    public TimerThread(TimeoutHashTable<K, T> table, K key, T value, long timeout) {
+    public TimerThread(Map<K, TimerThread<K, T>> table, K key, T value, long timeout) {
         this.table = table;
         this.key = key;
         this.value = value;
@@ -29,14 +31,15 @@ public class TimerThread<K, T> extends Thread {
 
                 Thread.sleep(1000L);
             }
-            T removedValue = table.remove(key);
-            System.out.println("The value: " + removedValue + " is removed!");
+            table.remove(key);
+            System.out.println("The value:" + value + " removed!");
         } catch (InterruptedException e) {
+            System.out.println("I was interrupted on " + currentTime + " second");
             return;
         }
     }
 
-    public void restartTimer() {
+    public void restart() {
         this.currentTime = timeout;
     }
 
