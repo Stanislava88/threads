@@ -10,7 +10,7 @@ public class Demo {
         Thread.sleep(2000L);
 
         table.remove(1);
-        table.put(1, "Person"); // timer Restart + replace value
+        table.put(1, "Person"); 
         Thread.sleep(12000L);
 
         Object result1 = table.get(1); // Eq Null
